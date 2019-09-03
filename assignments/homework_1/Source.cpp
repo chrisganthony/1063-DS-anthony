@@ -1,7 +1,8 @@
 // Chris Anthony
 // Data Structures : Dr. Griffin
 // Assignment 1
-// Description:This program reads data from a file and utilizes arrays to load and print the results to an output file. 
+// Description:This program reads data from a file and utilizes arrays 
+//to load and print the results to an output file. 
  
 #include <iostream> // write to and read from stdin and stdout
 #include <string>   
@@ -43,7 +44,8 @@ int loadClassList(Student *classList, string filename)
 	while (!fin.eof())
 	{
 		// Read one line in the file into one struct at array location `i`
-		fin >> classList[i].fname >> classList[i].lname >> classList[i].numGrades;
+		fin >> classList[i].fname >> classList[i].lname 
+			>> classList[i].numGrades;
 
 		for (int j = 0; j < classList[i].numGrades; j++)
 		{
@@ -84,8 +86,8 @@ void printClassList(Student *classList, int classSize)
 
 	for (int i = 0; i < classSize; i++)
 	{
-		outfile  << i + 1 << ". " << classList[i].fname << " "
-			<< classList[i].lname << ":\t";
+		outfile  << i + 1 << ". " << left << setw(13)
+			<< (classList[i].fname + ' ' + classList[i].lname) << ':' <<'\t';
 
 		for (int j = 0; j < classList[i].numGrades; j++)
 		{
