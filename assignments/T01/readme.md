@@ -1,7 +1,8 @@
 # Chris Anthony, Take Home Exam
 
+```
+### Question #1
 ```cpp
-//Question #1:
 
 int sumArrays(int A[], int B[], int c[], int size)
 {
@@ -17,8 +18,9 @@ int sumArrays(int A[], int B[], int c[], int size)
 return sum;
 }
 
-
-//Question #2:
+```
+### Question #2
+```cpp
 
 	double avg2D(int A[][10], int size)
 	{
@@ -38,10 +40,9 @@ return sum;
 		return avg;
 	}
 
-
-
-//Question #3 (a):
-
+```
+### Question #3 (a)
+```cpp 
 	for (int r = 1; r <= 8; r *= 2)
 	{
 		for (int c = 0; c < r; c++)
@@ -51,9 +52,10 @@ return sum;
 
 		cout << endl;
 	}
-
-
-//Question #3 (b):
+	
+```
+### Question #3 (b)
+```cpp
 
 	for (int r = 1; r <= 32; r *= 2)
 	{
@@ -65,8 +67,9 @@ return sum;
 		cout << endl;
 	}
 
-
-//Question #4:
+```
+### Question #4
+```cpp
 
 	Stats aggregateVals(int A[], int size)
 	{
@@ -97,8 +100,9 @@ return sum;
 		return s;
 	}
 
-
-//Question #5:
+```
+### Question #5
+```cpp
 
 	Stats()
 	{
@@ -108,9 +112,9 @@ return sum;
 		sum = 0;
 	}
 
-
-//Question #6:
-
+```
+### Question #6
+```cpp
 	double calcStdDev(int A[], int size)
 	{
 		double dif[], sum = 0.0, sum1 = 0.0, avg = 0.0, avg1 = 0.0, result = 0.0;
@@ -132,13 +136,15 @@ return sum;
 			sum1 += dif[i];
 		}
 		avg1 = sum1 / size;
-
+		result = sqrt(avg1);
+		
 		return result;
 	}
+	
 ```
-
 ### Question #7
 ```cpp
+
 	void initIntArray(int *&A, int size)
 	{
 		A = new int[size];
