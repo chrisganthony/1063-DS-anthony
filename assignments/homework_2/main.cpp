@@ -1,26 +1,26 @@
 /** Chris Anthony
 Data Structures : Dr. Griffin
 Homework 2 - Resizable Array Stack
-Description:This program reads data from a file and utilizes three methods
-to check, enlarge and shrink the size an array based stack. The results
+Description:This program reads data from a file and uses three methods
+to check, enlarge and shrink the size of an array based stack. The results
 are printed to an output file.
 */
 
-#include<iostream>
-#include<fstream>
+#include <iostream> // write to and read from stdin and stdout
+#include <fstream>
 
 using namespace std;
 
 class Stack
 {
 private:
-	int *A;         // container of items (could make it a list)
-	int Top;        // keep track of top
-	int Size;       // Arrays need a size
-	int count;
+	int *A;  // container of items (could make it a list)
+	int Top; // keep track of top
+	int count; // Arrays need a size
+	int Size;
+	bool hasEnlarged;
 
 public:
-
 	/**
 	 * Stack constructor (default)
 	 * Description:
@@ -32,7 +32,8 @@ public:
 		Size = 10;
 		A = new int[Size];
 		Top = -1;
-		count = Size;
+		count = Top + 1;
+		hasEnlarged = false;
 	};
 
 	/**
@@ -48,6 +49,7 @@ public:
 		Size = s;
 		A = new int[Size];
 		Top = -1;
+		hasEnlarged = false;
 	};
 
 	/**
@@ -60,11 +62,14 @@ public:
 	 *     bool : true = success
 	 */
 
-	bool Push(int val)	// Push value onto stack
+	bool Push(int val) // Push value onto stack
 	{
-		if (!Full()) {
+		if (!Full())
+		{
 			Top++;
+			count++;
 			A[Top] = val;
+			checkResize();
 			return true;
 		}
 		else
@@ -83,17 +88,20 @@ public:
 	 *     int : item on stack
 	 */
 
-	int Pop()	// Remove item from top of stack
+	int Pop() // Remove item from top of stack
 	{
-		if (!Empty()) {
+		if (!Empty())
+		{
 			int temp = 0;
 			temp = A[Top];
 			Top--;
+			count--;
+			checkResize();
 			return temp;
 		}
-		else {
-			// should return a value that implies failuer, but good enough for now
-			cout << "Cannot remove item from empty stack" << endl;
+		else
+		{
+			cout<< "Cannot remove item from empty stack" << endl;
 		}
 		return 0;
 	}
@@ -127,72 +135,121 @@ public:
 	{
 		return (Top == Size - 1);
 	}
+	/**
+	 * checkResize
+	 * Description:
+	 *    looks at the current ratio the stack contains and decides whether
+	      to enlarge or shrink it.
+	 * Params:
+	 *    void
+	 * Returns:
+		  void
+	 */
 
-	//void checkResize(int newSize)
+	void checkResize()
 	{
 
-		if (count = .8 * Size)
+		if (count >= int(Size * .8))
 		{
 			Enlarge();
 		}
-		else (count = .2 * newSize)
+		else if (count <= int(Size * .2))
 		{
-			Reduce();
+			if (hasEnlarged)
+			{
+				Reduce();
+			}
 		}
 	}
 
-	//void Enlarge()
+	/**
+	 * Enlarge
+	 * Description:
+	 *    grows the array
+	 * Params:
+	 *    void
+	 * Returns:
+		  void
+	 */
+
+	void Enlarge()
 	{
-		int newSize = Size * 1.5;
-		int *B = new int[newSize];
+		int newsize = int(Size * 1.5);
+		int *b = new int[newsize];
 		int *deleter = NULL;
+
 
 		for (int i = 0; i < Size; i++)
 		{
-			B[i] = A[i];
+			b[i] = A[i];
 		}
-
-		for (int i = Size; i <= newSize; i++)
-		{
-			B[i] = NULL;
-		}
+		Size = newsize;
 
 		deleter = A;
-		A = B;
+		A = b;
 		delete[] deleter;
+		hasEnlarged = true;
 	}
 
-	//void Reduce()
-	{
-		int oldSize = Size;
-		int *C = new int(oldSize);
-		int *deleter1 = NULL;
+	/**
+	 * Reduce
+	 * Description:
+	 *    shrinks the array
+	 * Params:
+	 *    void
+	 * Returns:
+		  void
+	 */
 
+	void Reduce()
+	{
+		int oldSize = int(Size * .5);
+		int *C = new int[oldSize];
+		int *deleter1 = NULL;
 
 		for (int i = 0; i < oldSize; i++)
 		{
-			C[i] = B[i];
+			C[i] = A[i];
 		}
+		Size = oldSize;
 
-		deleter1 = B;
-		B = C;
+		deleter1 = A;
+		A = C;
 		delete[] deleter1;
 	}
-	/**
- * Print
- * Description:
- *    Prints stack for inspection
- * Params:
- *    void
- * Returns:
- *     void
- */
 
-	void Print() // function to print the contents of the list
+	/**
+	 * MaxSize
+	 * Description:
+	 *    returns the current max size
+	 * Params:
+	 *    void
+	 * Returns:
+	 *     int : Size
+	 */
+	int GetSize()
 	{
-		for (int i = Top; i >= 0; i--) {
-			cout << A[i] << endl;
+		return Size;
+	}
+
+	/**
+	 * Print
+	 * Description:
+	 *    Prints stack for inspection
+	 * Params:
+	 *    void
+	 * Returns:
+	 *    void
+	 */
+
+	void Print(ostream& out) // function to print the contents of the list
+	{
+
+		for (int i = Top; i >= 0; i--)
+		{
+			out<< A[i] << ' ';
 		}
+		out<< endl;
 	}
 };
 
@@ -200,27 +257,54 @@ public:
  * Main Program
  *
  */
-int main() 
+int main()
 {
-	ofstream outfile;
-	outfile.open("stack_out.dat");
+	ofstream outfile; // declare an output file
+	outfile.open("stack_out.dat.txt"); // create "stack_out.dat" for writing
 
-	ifstream fin;
-	fin.open("input_data.txt");
+	ifstream fin; // get a stream variable
+	fin.open("input_data.txt"); // open "input_data.txt" for reading
 
-	Stack S; // Instance of our stack default constructor
-	int values[] = { 1,2,3,4,5,6,7,8,9,10 };
-	int val;
+	Stack S;         // Instance of our stack default constructor
+	char operation;  // '+' or '-', represents push or pop
+	int number;      // the number to push or pop
+	int maxsize = 0; // initializes maxsize to 0
 
-	// Load the stack with data from file
-	for (int i = 0; i < 10; i++)
+	while (fin >> operation >> number)
 	{
-		s.Push(values[i]);
+		switch (operation)
+		{
+		case '+':
+			S.Push(number);
+			if (S.GetSize() > maxsize)
+			{
+				maxsize = S.GetSize();
+			}
+			// if s getsize is bigger than maxsize
+			// maxsize equal s getsize
+			break;
+		case '-':
+			S.Pop();
+			break;
+		default:
+			outfile<< "BAD OPERATION!" << endl;
+		}
+		
 	}
 
-	cout << values[i] << endl;
+	outfile << "Chris Anthony\n";
+	outfile << "10 / 08 / 19\n";
+	outfile << "Homework 2\n\n";
+	outfile << "Stack Size: " << S.GetSize() << endl;
+	outfile << "Largest Size: " << maxsize << endl;
+	outfile << "Values: ";
+	S.Print(outfile);
+	outfile << endl;
 
-	system("pause");
+	// Command to close file
+	fin.close();
+	outfile.close();
+
 	return 0;
 }
 
