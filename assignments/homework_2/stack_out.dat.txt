@@ -1,0 +1,8 @@
+Chris Anthony
+10 / 08 / 19
+Homework 2
+
+Stack Size: 7
+Largest Size: 15
+Values: 4 9 10 
+
