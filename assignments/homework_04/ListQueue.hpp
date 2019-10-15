@@ -2,9 +2,8 @@
  * ListQueue.hpp
  *
  * List Based Queue definition and implementation.
- * Author: Terry Griffin
- * Date: Oct 2019
  */
+
 #include <iostream>
 #include <string>
 
@@ -25,11 +24,12 @@ struct Animal {
 		scary = 99.0;
 	}
 
-	// Should add an overloaded constructor
-	Animal(string ani_name, double ani_weight, double ani_scary) {
-		name = ani_name;
-		weight = ani_weight;
-		scary = ani_scary;
+	  // Overloaded constructor
+    Animal(string n, double w, double s)
+  	{
+	      name = n;
+	  	  weight = w;
+		  scary = s;
 	}
 
 };
@@ -43,10 +43,10 @@ ostream &operator<<(ostream &os, const Animal *a) {
 }
 
 struct Node {          // Typical node setup for a list. 
-	Animal *A;           // simple integer data.
+	Animal *A;         // simple integer data.
 	Node* Next;
 
-	Node(Animal *a) {             // default constructor
+	Node(Animal *a) {        // default constructor
 		A = a;
 		Next = NULL;
 	}
@@ -64,14 +64,13 @@ private:
 	Node* Rear;             // rear of the queue (where we add to)
 public:
 	ListQueue();            // construct
-	void Push(Animal *A);         // add integers to rear
-	Animal* Pop();              // remove from front
+	void Push(Animal *A);   // add animals to rear
+	Animal* Pop();          // remove from front
 	void Print();           // print for debugging
 	bool Empty();           // is queue empty (can't remove from empty queue)
 	void PrintPointers();   // added for lecture purposes
 	Node* GetFront();       // added for lecture purposes
 };
-
 
 /**
  * ListQueue
@@ -118,16 +117,16 @@ void ListQueue::Push(Animal *A) {
  *     int : front item
  */
 Animal* ListQueue::Pop() {
-	Animal *temp = Front->A;     // get front data temporarily
-	Node* T = Front;            // Point to the front temporarily
+	Animal *temp = Front-> A;     // get front data temporarily
+	Node* T = Front;             // Point to the front temporarily
 	Front = Front->Next;        // Move front to next item 
-	delete T;                   // Now we can delete the old front
+	delete T;                  // Now we can delete the old front
 
-	if (!Front) {                 // If front is NULL make rear NULL as well
-		Rear = NULL;              // because if front is NULL list is empty!  
+	if (!Front) {              // If front is NULL make rear NULL as well
+		Rear = NULL;          // because if front is NULL list is empty!  
 	}
 
-	return temp;                // return front integer
+	return temp;            // return front integer
 }
 
 /**
@@ -145,7 +144,7 @@ void ListQueue::Print() {
 	while (temp) {
 		cout << temp->A;
 		if (temp->Next) {
-			cout << "->";
+			cout << " -> ";
 		}
 		temp = temp->Next;
 	}
@@ -178,7 +177,6 @@ void ListQueue::PrintPointers() {
 	cout << "Front = " << Front << endl;
 	cout << "Rear = " << Rear << endl;
 }
-
 
 /**
  * GetFront
