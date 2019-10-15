@@ -1,9 +1,10 @@
 #include "ListStack.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
- ostream &operator<<(ostream &os, const Animal *a) {
+ostream &operator<<(ostream &os, const Animal *a) {
     os << a->name << ':' << a->weight << ':' << a->scary;
     return os;
 }
@@ -17,7 +18,7 @@ using namespace std;
  * Returns:
  *     void
  */
-ListStack::ListStack(string, double, double) {
+ListStack::ListStack() {
     Top = NULL;
 }
 
@@ -67,6 +68,7 @@ Animal *ListStack::Pop() {
         return a;           // Return our animal
     }
 }
+
 
 /**
  * Print

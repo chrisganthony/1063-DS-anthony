@@ -20,19 +20,21 @@ struct Animal {
     double scary;
 
     // Default constructor
-    Animal() {
+    Animal()
+    {
         name = "";
         weight = 0.0;
         scary = 99.0;
     }
 
-    // Should add an overloaded constructor
-     Animal(std::string n, double w, double s)
-	{
-		name = n;
-		weight = w;
+     // Overloaded constructor
+     Animal(string n, double w, double s)
+  	{
+	    name = n;
+	  	weight = w;
 		scary = s;
-	}
+	 }
+
 };
 
 // Overload "<<" operator for animals
@@ -67,8 +69,7 @@ private:
     Node *Top;
 
 public:
-    ListStack(); // constructor
-    ListStack(string n, double w, double s);  // overloaded constructor
+    ListStack();          // constructor
     void Push(Animal *);  // stack gets Animals
     Animal *Pop();        // Pop returns top animal
     void Print();         // print stack for debugging

@@ -9,24 +9,32 @@
 #include "ListStack.h"    // include our stack definition
 #include <fstream>        
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 int main() {
-    ifstream fin;
-    fin.open("animals.txt");  // input file of animal info                   
-    Animal *a;                    // animal pointer used to hold popped animals
-    ListStack LS;                 // List based stack object
+    ifstream fin("animals.txt");  // input file of animal info                   
+    Animal *a;
+    
+    // Variable Declarations
+    string name;
+    double weight;
+    double scary;  
+                       // animal pointer used to hold popped animals
+    ListStack LS;
+
+                   // List based stack object
 
     // While still animals in the file
     while (!fin.eof()) 
     {
-        a = new Animal (name,weight,scary);                         // allocate memory for an animal
-        fin >> a->name >> a->weight >> a->scary;  // load animal with file data
-        LS.Push(a);                               // push animal onto the stack
+       // allocate memory for an animal
+        fin >>  name >> weight >>  scary;  // load animal with file data
+        a = new Animal(name, weight, scary); 
+        LS.Push(a);                        // push animal onto the stack
     }
-
-
+     
     LS.Print();             // Print the stack
 
     cout << endl;           // ummm
@@ -40,4 +48,6 @@ int main() {
     cout << a << endl;      // print animal (cout operator overloaded)
 
     LS.Print();             // print the stack
+
+    system("pause");
 }
