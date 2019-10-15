@@ -66,7 +66,8 @@ private:
     Node *Top;
 
 public:
-    ListStack();          // constructor
+    ListStack(); // default constructor
+    ListStack(string, double ,double); // overloaded constructor
     void Push(Animal *);  // stack gets Animals
     Animal *Pop();        // Pop returns top animal
     void Print();         // print stack for debugging
