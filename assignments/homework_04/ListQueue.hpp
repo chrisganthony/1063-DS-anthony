@@ -28,8 +28,8 @@ struct Animal {
     Animal(string n, double w, double s)
   	{
 	      name = n;
-	  	  weight = w;
-		  scary = s;
+	      weight = w;
+	      scary = s;
 	}
 
 };
