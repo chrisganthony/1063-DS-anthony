@@ -69,7 +69,6 @@ Animal *ListStack::Pop() {
     }
 }
 
-
 /**
  * Print
  * Purpose:
