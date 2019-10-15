@@ -33,14 +33,14 @@ ListStack::ListStack() {
  */
 void ListStack::Push(Animal *A) {
     // allocate new memory
-    Node *anode = new Node(A);        // Allocate new memory
+    Node *anode = new Node(A);    // Allocate new memory
 
     // check if list is empty
     if (!Top) {
-        Top = anode;                  // If empty stack just point to new node
+        Top = anode;             // If empty stack just point to new node
     } else {
-        anode->Next = Top;            // Link new node by point its next to old top
-        Top = anode;                  // Now update top to point to the new node
+        anode->Next = Top;      // Link new node by point its next to old top
+        Top = anode;            // Now update top to point to the new node
     }
 }
 
@@ -68,7 +68,6 @@ Animal *ListStack::Pop() {
         return a;           // Return our animal
     }
 }
-
 
 /**
  * Print

@@ -1,8 +1,8 @@
 /**
  * Lecture 08
- * 
- * List based queue 
- * 
+ *
+ * List based queue
+ *
  * Author: Terry Griffin
  * Date: Oct 4th ish 2019
  */
@@ -14,33 +14,35 @@ using namespace std;
 
 
 int main() {
-  ListQueue LQ;                 // Queue instance 
 
-  
-  for(int i=0;i<10;i++){        // Load random values onto the queue
-    int r = rand()%100;
-    cout<<r<<" ";
-    LQ.Push(r);
-  }
+	ifstream fin("animal.txt");  // input file of animal info 
 
-  cout<<endl;                     // ummmm 
+	Animal *a;
+	string name;
+	double weight;
+	double scary;
 
-  LQ.Print();                     // print queue to see where values are
+	ListQueue LQ;                 // Queue instance 
+	
+	while (!fin.eof()) {
+		fin >> name >> weight >> scary;
+		a = new Animal(name, weight, scary);                         // allocate memory for an animal
+		LQ.Push(a);                               // push animal onto the stack
+	}
+	
+	LQ.Print();
+	cout << "_____________" << endl;
 
+	
+	LQ.Pop();
+	LQ.Print();
+	cout << "_____________" << endl;
+	
 
-  for(int i=0;i<5;i++){           // remove 5 items
-    if(!LQ.Empty()){
-      int t = LQ.Pop();
-      cout<<"Item: "<<t<<endl;    // print out items
-    }else{
-      cout<<"Empty queue!"<<endl;
-    }
-
-  }
-
-  LQ.Print();                     // print again to show front removal
-  LQ.PrintPointers();
-
-  Node* f = LQ.GetFront();        // We added this in class JUST to see what front
-  cout<<f->data<<endl;            // pointed to.
+	LQ.Pop();
+	LQ.Print();
+	cout << "_____________" << endl;
+	
+	system("pause");
+	return (0);
 }

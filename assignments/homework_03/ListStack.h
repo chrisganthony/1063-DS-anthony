@@ -1,11 +1,8 @@
 /**
  * ListStack.h
  * 
- * List stack definition file. This stack hold animal types. Why? Cause integers
+ * List stack definition file. This stack hold animal types.
  * get a little boring after a while. 
- * 
- * Author: Terry Griffin
- * Date: Oct 4th ish 2019
  */
 #include <iostream>
 
@@ -20,20 +17,20 @@ struct Animal {
     double scary;
 
     // Default constructor
-    Animal()
+    Animal() 
     {
-        name = "";
+        name = " ";
         weight = 0.0;
         scary = 99.0;
     }
 
      // Overloaded constructor
-     Animal(string n, double w, double s)
+    Animal(string n, double w, double s)
   	{
-	    name = n;
-	  	weight = w;
-		scary = s;
-	 }
+	      name = n;
+	  	  weight = w;
+		  scary = s;
+	}
 
 };
 
