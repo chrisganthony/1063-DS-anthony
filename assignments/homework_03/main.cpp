@@ -48,6 +48,4 @@ int main() {
     cout << a << endl;      // print animal (cout operator overloaded)
 
     LS.Print();             // print the stack
-
-    system("pause");
 }
