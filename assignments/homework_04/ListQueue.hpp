@@ -25,8 +25,7 @@ struct Animal {
 	}
 
 	  // Overloaded constructor
-    Animal(string n, double w, double s)
-  	{
+       Animal(string n, double w, double s){
 	      name = n;
 	      weight = w;
 	      scary = s;
