@@ -10,11 +10,11 @@
 //                   output.num
 //
 // Description:	This program reads in arbitrarily long positive integers as
-//				strings,converts it into integers and then reads each number
-//				into a doubly linked list. It then utilizes functions to add,
+//		strings,converts it into integers and then reads each number
+//		into a doubly linked list. It then utilizes functions to add,
 //              subtract and multiply the contents of the two lists and places
 //              the result in a third doubly linked list. The results are then
-//				printed to the output file. 
+//		printed to the output file. 
 //       
 
 #include <iostream>
@@ -24,7 +24,7 @@
 
 using namespace std;
 
-struct Node {	 // node setup for a list. 
+struct Node {	 	  // node setup for a list. 
 	int data;	 // simple integer data.
 	Node* Next;
 	Node* Prev;
@@ -94,9 +94,9 @@ void DoubleyLinked::FrontSert(Node*& Temp) {
 		Tail = Temp;
 	}
 	else {		
-		Head->Prev = Temp;	   // Point to temp with head previous pointer 
+		Head->Prev = Temp;     // Point to temp with head previous pointer 
 		Temp->Next = Head;    //  Link new node by pointing its next to Head
-		Head = Temp;		 //   Now update head to point to the new node
+		Head = Temp;	     //   Now update head to point to the new node
 		
 	}
 	size++;
@@ -125,9 +125,9 @@ void DoubleyLinked::EndSert(Node*& Temp) {
 	}
 	else 	 
 	{
-		Tail->Next = Temp;	// link last node to new one
+		Tail->Next = Temp;   // link last node to new one
 		Temp->Prev = Tail;  // Point to tail with temp previous pointer 
-		Tail = Temp;		// Now update tail to point to the new node
+		Tail = Temp;	   // Now update tail to point to the new node
 
 	}
 	size++;
@@ -189,9 +189,9 @@ void DoubleyLinked::InsertEnd(int n) {
 void DoubleyLinked::Add(DoubleyLinked num1, DoubleyLinked num2) {
 
 	int min;
-	int val,					// actual value the 2 nodes equal to
-		digit,					// the digit dropped down in addition
-		carry = 0;				//  carries to the next digit
+	int val,			// actual value the 2 nodes equal to
+		digit,			// the digit dropped down in addition
+		carry = 0;		//  carries to the next digit
 
 	Node * trail1 = num1.Tail;	// Point to tail of list 1 with trail1 pointer
 	Node * trail2 = num2.Tail;	// Point to tail of list 2 with trail2 pointer
@@ -205,19 +205,19 @@ void DoubleyLinked::Add(DoubleyLinked num1, DoubleyLinked num2) {
 		val = trail1->data + trail2->data;	//add values in same placement
 		val += carry;
 		carry = 0;
-		digit = val % 10;					//actual digit to push
+		digit = val % 10;	         	//actual digit to push
 		if (val > 9) {
-			carry = 1;						//push 1 to next placement
+			carry = 1;			//push 1 to next placement
 		}
 
 		this->InsertFront(digit);			
-		trail1 = trail1->Prev;				//edit placements points
+		trail1 = trail1->Prev;			//edit placements points
 		trail2 = trail2->Prev;
 	}
 
-	if (num1.size > num2.size) {				//drops down remaining 
+	if (num1.size > num2.size) {			//drops down remaining 
 		trail1->data = trail1->data + carry;	//digits from largest number
-		while (trail1 != num1.Head) {			//if num on top is bigger
+		while (trail1 != num1.Head) {		//if num on top is bigger
 			this->InsertFront(trail1->data);
 			trail1 = trail1->Prev;
 		}
@@ -234,7 +234,7 @@ void DoubleyLinked::Add(DoubleyLinked num1, DoubleyLinked num2) {
 	else {
 		if (carry != 0) {
 			this->InsertFront(carry);	//insert most significant 
-		}								//bit if there is a carry
+		}					//bit if there is a carry
 	}
 }
 
@@ -271,23 +271,23 @@ void DoubleyLinked::Sub(DoubleyLinked num1, DoubleyLinked num2) {
 	for (int i = 0; i < min; i++) {
 
 		if (trail1->data < trail2->data) {	//if number on top is bigger
-			carry = 10;						//carry from the place on the left
+			carry = 10;			//carry from the place on the left
 			trail1->Prev->data -= 1;
 
 			val = (trail1->data - trail2->data) + carry;
 		}
 		else
 			val = (trail1->data - trail2->data); //do the subtraction
-												//from placement
+						       	    //from placement
 
-		this->InsertFront(val);						//insert the result to list
+		this->InsertFront(val);	             	   //insert the result to list
 
 		trail1 = trail1->Prev;
 		trail2 = trail2->Prev;
 	}
 	
 	if (num1.size > num2.size) {			//carry and the drop down other
-		trail1 = trail1->Next;				//digits
+		trail1 = trail1->Next;			//digits
 		while (trail1 != num1.Head) {
 			if (trail1->Prev->data == -1) {
 				trail1->Prev->data = 9;
@@ -367,16 +367,16 @@ int main() {
 		DoubleyLinked num1, num2, num3; // Creates 3 lists called num1, num2, num3 respectively;
 
 		fin >> op;
-		getline(fin, line);  // read file line by line
+		getline(fin, line); 	         // read file line by line
 		getline(fin, line);	
 
 		istringstream ss(line);		//strip line from file
-		while (ss >> c) {			//split up number in ASCII
-			x = (int)c - 48;		//convert to regular digit
+		while (ss >> c) {		//split up number in ASCII
+			x = (int)c - 48;	//convert to regular digit
 			num1.InsertEnd(x);
 		}
 
-		getline(fin, line);			//strip line from file
+		getline(fin, line);		//strip line from file
 		istringstream tt(line);		
 		while (tt >> d) {
 			x = (int)d - 48;
