@@ -58,7 +58,6 @@ public:
 	void InsertEnd(int);
 	void InsertFront(int);
 	void Add(DoubleyLinked, DoubleyLinked);
-	void Mul(DoubleyLinked, DoubleyLinked);
 	void Sub(DoubleyLinked, DoubleyLinked);
 	void Print(ofstream &);
 };
